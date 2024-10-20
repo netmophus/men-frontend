@@ -147,7 +147,6 @@ const login = async (formData) => {
   
   const register = async (formData) => {
     try {
-      console.log('API Base URL:', apiBaseUrl); // Vérification de l'URL de base de l'API
       console.log('Données envoyées pour l\'inscription:', formData);
 
       const res = await fetch(`${apiBaseUrl}/api/auth/register`, {
@@ -156,21 +155,10 @@ const login = async (formData) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-        credentials: 'include', // Assurez-vous que les cookies ou autres en-têtes d'identification sont envoyés
       });
 
       const data = await res.json();
       console.log('Réponse du serveur:', data);
-
-      if (!res.ok) {
-        const errorText = await res.text(); // Obtenez le texte brut de l'erreur
-        console.error('Erreur lors de l\'inscription:', errorText);
-        setSnackbarMessage(errorText || 'Erreur lors de l\'inscription');
-        setSnackbarSeverity('error');
-        setSnackbarOpen(true);
-        return;
-      }
-      
 
       if (res.ok) {
         setUser({
