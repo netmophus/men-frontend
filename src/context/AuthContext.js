@@ -155,6 +155,7 @@ const login = async (formData) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+        credentials: 'include', // Assurez-vous que les cookies ou autres en-têtes d'identification sont envoyés
       });
 
       const data = await res.json();
